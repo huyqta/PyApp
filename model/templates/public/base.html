@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmashSport Shop</title>
+</head>
+<script src="{{ url_for('static', filename='public/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jquery.marquee.min.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jqFancyTransitions.1.8.min.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jquery.slides.min.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/huyqta.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jquery.paging.js') }}"></script>
+<!--<script src="{{ url_for('static', filename='public/js/jquery.easy-paging.js') }}"></script>-->
+
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="js/jquery.slides.min.js"></script>-->
+<!--<script src="js/jquery.marquee.min.js"></script>-->
+<!--<script src="js/huyqta.js"></script>-->
+<!--<script src="js/jqFancyTransitions.1.8.min.js"></script>-->
+<!--<script src="js/owl.carousel.min.js"></script>-->
+
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,vietnamese' rel='stylesheet'
+      type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='public/css/style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='public/css/font-awesome/css/font-awesome.min.css') }}"/>
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='public/css/style.admin.css') }}"/>-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='public/css/style.admin.css') }}"/>-->
+<!--<link href="css/style.css" rel="stylesheet"/>-->
+<!--<link href="css/owl.carousel.css" rel="stylesheet"/>-->
+<!--<link href="css/owl.theme.css" rel="stylesheet"/>-->
+<!--<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+
+<script>
+    $(function () {
+        $("#slides").slidesjs({
+            width: 940,
+            height: 528,
+            start: 1,
+            navigation: {
+                active: false
+            },
+            play: {
+                auto: true
+            },
+            pagination: {
+                active: false
+            }
+        });
+    });
+</script>
+
+<body>
+<header>
+    <div class="logo">
+        <img id="logo-img" src="{{ url_for('static', filename='public/img/smashlogo.jpg') }}"/>
+    </div>
+    <nav>
+        <div class="navigation">
+            <div class="menu-wrap">
+                <nav class="menu">
+                    <ul class="clearfix">
+                        {% for cat in category if cat.active == 1 and cat.refparent == 0 %}
+                        <li><a href="{{ url_for('public_category', category=cat.id) }}">{{ cat.category }}</a>
+                            <ul class="sub-menu">
+                                {% for subcat in category if subcat.active == 1 and subcat.refparent == cat.id %}
+                                <li><a href="{{ url_for('public_category', category=subcat.id) }}">{{ subcat.category }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="navigation-right">
+                <div class="nav-item-icon" style="color: orange"><a href="{{ url_for('index') }}"><i class="fa fa-home fa-lg"></i></a></div>
+                <div class="nav-item-icon" style="color: orangered"><i class="fa fa-info fa-lg"></i></div>
+                <div class="nav-item-icon" style="color: gold"><i class="fa fa-at fa-lg"></i></div>
+                <div class="nav-item-icon" style="color: #0072BC"><i class="fa fa-facebook fa-lg"></i></div>
+                <div class="nav-item-icon" style="color: #a3bcea"><a href="{{ url_for('gmap') }}"><i class="fa fa-map-marker fa-lg"></i></a></div>
+            </div>
+        </div>
+    </nav>
+</header>
+{% block content %}{% endblock %}
+
+
+<footer>
+    <div class='marquee'>
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_yonex.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_asics.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_kswiss.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_adidas.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_head.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_ua.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_nb.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_kookaburra.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_puma.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_saucony.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_odlo.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_prince.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mazon.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_hitec.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_nike.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_gryphon.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_lining.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_tk.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_hilly.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_yehlex.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_vibram.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mercian.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_merrell.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_thorlo.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_craft.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mizuno.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_wilson.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_grays.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_babolat.jpg') }}">
+    </div>
+    <div class="footer-info">
+        <div class="footer-content">
+            <div class="footer-content-item">
+                <span> ĐIỆN THOẠI </span>
+
+                <p>123.456.789.0</p>
+            </div>
+            <div class="footer-content-item">
+                <span> EMAIL </span>
+
+                <p>anhhuydng@gmail.com</p>
+            </div>
+            <div class="footer-content-item">
+                <span> THEO DÕI </span>
+
+                <p>FACEBOOK</p>
+            </div>
+            <div class="footer-content-item">
+                <span> ĐỊA CHỈ </span>
+
+                <p>107 Thanh Long - TP Đà Nẵng</p>
+            </div>
+
+        </div>
+        <div class="footer-copyright">Copyright © 2014, SmashSport Shop</div>
+    </div>
+</footer>
+</body>
+</html>

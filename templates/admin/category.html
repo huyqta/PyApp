@@ -1,0 +1,58 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<form id="form-category" class="form-container" method="post">
+    <p>Breadcrumbs:
+        {% for crumb in g.breadcrumbs %}
+        <a href="{{ crumb.path }}">{{ crumb.title }}</a>
+        {% if not loop.last %}&raquo;{% endif %}
+        {% endfor %}
+    </p>
+
+    <div class="form-header">LOẠI HÀNG</div>
+    <div class="form-container">
+        <table class="table-input">
+            <tr>
+                <td>MAT HANG</td>
+                <td><input type="text" id="category" name="category"></td>
+            </tr>
+            <tr>
+                <td>GIAI THICH</td>
+                <td><textarea id="cat-description" name="description"></textarea></td>
+            </tr>
+            <tr>
+        </table>
+        <hr>
+        <table class="table-grid">
+            <tr class="table-header">
+                <td>ID</td>
+                <td>CAT</td>
+                <td>DES</td>
+                <td>ACT</td>
+                <td>PARENT</td>
+                <td>EDITOR</td>
+            </tr>
+            {% for cat in category %}
+            <tr class="cat-data-row">
+                <td class="cat_id">{{ cat.id }}</td>
+                <td class="cat_name">{{ cat.category }}</td>
+                <td class="cat_desc">{{ cat.description }}</td>
+                <td class="cat_act">{{ cat.active }}</td>
+                <td class="cat_par">{{ cat.refparent }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><input type="text" id="new-cat-id" name="new_cat_id" readonly></td>
+                <td><input type="text" id="new-cat-name" name="new_cat_name"></td>
+                <td><textarea id="new-cat-des" name="new_cat_des"></textarea></td>
+                <td><input type="text" id="new-cat-act" name="new_cat_act"></td>
+                <td><input type="text" id="new-cat-par" name="new_cat_par"></td>
+                <td>
+                    <input type="button" class="buttonC" id="create-cate" name="new_cat_type" value="C">
+                    <input type="button" class="buttonU" id="update-cate" name="new_cat_type" value="U">
+                    <input type="button" class="buttonD" id="delete-cate" name="new_cat_type" value="D">
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+{% endblock %}

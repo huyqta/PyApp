@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SmashSport Shop Administrator</title>
+
+    <meta charset="UTF-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<script src="{{ url_for('static', filename='admin/js/lib/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/js/admin.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/js/lib/ckeditor/ckeditor.js') }}"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin/css/style.admin.css') }}"/>
+<body>
+Welcome {% print(session['username']) %} <br>
+
+<form method="post" action="{{ url_for('logout') }}"><input type="submit" value="Logout">
+</form>
+
+<div style="background-color: #FFFFFB; margin: 30px auto; border-bottom: double 4px #000000; border-top: double 4px #000000">
+    <div class="container">
+        <div class="admin-nav-button" style="background-color: #46a546; height: 25px; width: 120px; border-radius: 5px; margin: 0 auto; text-align:
+center; border: 15px;"><a style="text-decoration: none; color: #ffffff" href="/admin/product">PRODUCT</a></div>
+<div class="admin-nav-button" style="background-color: #46a546; height: 25px; width: 120px; border-radius: 5px; margin: 0 auto; text-align:
+center; border: 15px;"><a style="text-decoration: none; color: #ffffff" href="/admin/category">CATEGORY</a></div>
+<div class="admin-nav-button" style="background-color: #46a546; height: 25px; width: 120px; border-radius: 5px; margin: 0 auto; text-align:
+center; border: 15px;"><a style="text-decoration: none; color: #ffffff" href="/admin/images/0">IMAGES</a></div>
+<div class="admin-nav-button" style="background-color: #46a546; height: 25px; width: 120px; border-radius: 5px; margin: 0 auto; text-align:
+center; border: 15px;"><a style="text-decoration: none; color: #ffffff" href="/admin/trademark">TRADEMARK</a></div>
+        {% block content %}{% endblock %}
+    </div>
+</div>
+</body>
+</html>

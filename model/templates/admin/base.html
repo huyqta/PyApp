@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SmashSport Shop Administrator</title>
+
+    <meta charset="UTF-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<script src="{{ url_for('static', filename='admin/js/lib/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/js/admin.js') }}"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin/css/style.admin.css') }}"/>
+<body>
+Welcome {% print(session['username']) %} <br>
+
+<form method="post" action="{{ url_for('logout') }}"><input type="submit" value="Logout">
+</form>
+
+<div style="background-color: #FFFFFB; margin: 30px auto; border-bottom: double 4px #000000; border-top: double 4px #000000">
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+</body>
+</html>

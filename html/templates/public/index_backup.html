@@ -1,0 +1,229 @@
+
+
+
+<section>
+
+    <div id="right-side">
+        <div id="slideshowHolder-box">
+            <div id="slideshowHolder">
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+            </div>
+        </div>
+        <div class="text-head"> VỢT</div>
+        <div class="item-row">
+            <div class="item-group">
+                {% for prd in product if prd[5] == 1 and prd[7] == 1 %}
+                <article class="item">
+                    <figure>
+                        <img src="{{ prd[3] }}">
+                        <span>{{ prd[1] }}</span>
+
+                        <p>{{ prd[4] }} VND</p>
+                        {% if prd[6] == 1 %}
+                        <div class="discount-info"><span>{{ prd[6] }}</span></div>
+                        {% endif %}
+                    </figure>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="text-head"> GIÀY</div>
+        <div class="item-row">
+            <div class="item-group">
+                {% for prd in product if prd[5] == 2 and prd[7] == 1 %}
+                <article class="item">
+                    <figure>
+                        <img src="{{ prd[3] }}">
+                        <span>{{ prd[1] }}</span>
+
+                        <p>{{ prd[4] }} VND</p>
+
+                        <div class="discount-info"><span>GIẢM GIÁ 50%</span></div>
+                    </figure>
+                </article>
+                {% endfor %}
+                <!--<article class="item">-->
+                <!--<figure>-->
+                <!--<img src="{{ url_for('static', filename='public/img/products/shoes/1553.png') }}">-->
+                <!--<span>SHB 01 LTD LCW</span>-->
+
+                <!--<p>USD 200.00</p>-->
+
+                <!--<div class="discount-info"><span>GIẢM GIÁ 50%</span></div>-->
+                <!--</figure>-->
+                <!--</article>-->
+                <!--<article class="item">-->
+                <!--<figure>-->
+                <!--<img src="img/products/shoes/1553.png">-->
+                <!--<span>SHB 01 LTD LCW</span>-->
+
+                <!--<p>USD 200.00</p>-->
+                <!--</figure>-->
+                <!--</article>-->
+                <!--<article class="item">-->
+                <!--<figure>-->
+                <!--<img src="img/products/shoes/1553.png">-->
+                <!--<span>SHB 01 LTD LCW</span>-->
+
+                <!--<p>USD 200.00</p>-->
+                <!--</figure>-->
+                <!--</article>-->
+                <!--<article class="item">-->
+                <!--<figure>-->
+                <!--<img src="img/products/shoes/1553.png">-->
+                <!--<span>SHB 01 LTD LCW</span>-->
+
+                <!--<p>USD 200.00</p>-->
+                <!--</figure>-->
+                <!--</article>-->
+            </div>
+        </div>
+        <div class="text-head"> ÁO NAM</div>
+        <div class="item-row">
+            <div class="item-group">
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+
+                        <div class="discount-info"><span>GIẢM GIÁ 50%</span></div>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+            </div>
+        </div>
+        <div class="text-head"> ÁO NỮ</div>
+        <div class="item-row">
+            <div class="item-group">
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+
+                        <div class="discount-info"><span>GIẢM GIÁ 50%</span></div>
+                    </figure>
+                </article>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+<footer>
+    <div class='marquee'>
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_yonex.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_asics.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_kswiss.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_adidas.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_head.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_ua.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_nb.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_kookaburra.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_puma.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_saucony.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_odlo.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_prince.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mazon.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_hitec.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_nike.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_gryphon.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_lining.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_tk.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_hilly.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_yehlex.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_vibram.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mercian.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_merrell.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_thorlo.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_craft.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mizuno.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_wilson.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_grays.jpg') }}">
+        <img alt="Scroll image" style="border:0px" src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_babolat.jpg') }}">
+    </div>
+    <div class="footer-info">
+        <div class="footer-content">
+            <div class="footer-content-item">
+                <span> ĐIỆN THOẠI </span>
+
+                <p>123.456.789.0</p>
+            </div>
+            <div class="footer-content-item">
+                <span> EMAIL </span>
+
+                <p>anhhuydng@gmail.com</p>
+            </div>
+            <div class="footer-content-item">
+                <span> THEO DÕI </span>
+
+                <p>FACEBOOK</p>
+            </div>
+            <div class="footer-content-item">
+                <span> ĐỊA CHỈ </span>
+
+                <p>107 Thanh Long - TP Đà Nẵng</p>
+            </div>
+
+        </div>
+        <div class="footer-copyright">Copyright © 2014, SmashSport Shop</div>
+    </div>
+</footer>
+</body>
+</html>

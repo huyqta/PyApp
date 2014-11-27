@@ -1,0 +1,97 @@
+{% extends "public/base.html" %}
+{% block content %}
+<script>
+    var counts = '{{ products }}';
+
+</script>
+<section>
+
+    <div id="right-side">
+        <div id="slideshowHolder-box">
+            <div id="slideshowHolder">
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+            </div>
+        </div>
+    </div>
+    <div class="product-container">
+        <div class="filter">
+            <div id="filter-header">FILTER</div>
+            <div id="filter-price">
+                <ul>
+                    <li> 5 ></li>
+                    <li> 3 > 5</li>
+                    <li> 1 > 3</li>
+                    <li> 0 > 1</li>
+                </ul>
+            </div>
+        </div>
+        <div class="products">
+            <div class="product-path">
+                <a href="#">Vợt</a>
+            </div>
+
+            <div class="product-bar">
+                Sort by
+                <select class="sort-select">
+                    <option value="#">Price</option>
+                    <option value="#">Newest</option>
+                </select>
+                Item per page
+                <select class="item-per-page">
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="24">24</option>
+                    <option value="999">All</option>
+                </select>
+                <span id="product_count" style="margin:0; padding: 0; vertical-align: middle">{{ products|length }}</span>
+            </div>
+            <div class="product-items">
+                <ul>
+                    <script>
+
+                    </script>
+                    {% for prd in products if prd.active == 1 %}
+                    <li class="item-box">
+                        <article>
+                            <figure>
+                                <img src="{{ prd.imageurl }}">
+                                {% if prd.refdiscount == 1 %}
+                                <span class="product-sale">Sale</span><br><br>
+                                {% else %}
+                                <span class="product-sale not-sale"></span><br><br>
+                                {% endif %}
+                            </figure>
+                        </article>
+                        <span class="product-name">{{ prd.name }}</span><br>
+                        {% if not prd.disprice %}
+                        <span class="product-price">{{ prd.price }} VND</span><br>
+                        {% else %}
+                        <span class="product-price-old">{{ prd.price }} VND</span>
+                        <span class="product-price-discount">{{ prd.disprice }} VND</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+        <div id="pagination">
+            <ol id="paging">
+                <li>Prev</li>
+                <li>#n</li>
+                <li>#n</li>
+                <li>#c</li>
+                <li>#n</li>
+                <li>#n</li>
+                <li>Next</li>
+            </ol>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

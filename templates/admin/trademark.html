@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<form id="form-trademark" class="form-container" method="post">
+    <div class="form-header">THUONG HIEU</div>
+    <div class="form-container">
+        <table class="table-input">
+            <tr>
+                <td>THUONG HIEU</td>
+                <td><input type="text" id="trmegory" name="trmegory"></td>
+            </tr>
+            <tr>
+                <td>GIAI THICH</td>
+                <td><textarea id="trm-description" name="description"></textarea></td>
+            </tr>
+            <tr>
+        </table>
+        <hr>
+        <table class="table-grid">
+            <tr class="table-header">
+                <td>ID</td>
+                <td>NAME</td>
+                <td>DES</td>
+                <td>LOGO</td>
+                <td>ACT</td>
+                <td>CATE</td>
+            </tr>
+            {% for trm in trademarks %}
+            <tr class="trm-data-row">
+                <td class="trm_id">{{ trm.id }}</td>
+                <td class="trm_name">{{ trm.name }}</td>
+                <td class="trm_desc">{{ trm.description }}</td>
+                <td class="trm_par">{{ trm.urllogo }}</td>
+                <td class="trm_act">{{ trm.active }}</td>
+                {% for cat in category if cat.id == trm.refcategory %}
+                <td width="150px" height="auto" title="{{ trm.refcategory }}">{{ cat.category }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><input type="text" id="new-trm-id" name="new_trm_id" readonly></td>
+                <td><input type="text" id="new-trm-name" name="new_trm_name"></td>
+                <td><textarea id="new-trm-des" name="new_trm_des"></textarea></td>
+                <td><input type="text" id="new-trm-par" name="new_trm_par"></td>
+                <td><input type="text" id="new-trm-act" name="new_trm_act"></td>
+                <td>
+                    <select id="new-trm-cat" name="new_trm_cat">
+                        {% for cat in category if cat.active == 1 and cat.refparent == 0 %}
+                        <option value="{{ cat.id }}"> {{ cat.category }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <input type="button" class="buttonC" id="create-trme" name="new_trm_type" value="C">
+                    <input type="button" class="buttonU" id="update-trme" name="new_trm_type" value="U">
+                    <input type="button" class="buttonD" id="delete-trme" name="new_trm_type" value="D">
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+{% endblock %}

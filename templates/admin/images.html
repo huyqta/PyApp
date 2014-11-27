@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<form id="form-images" class="form-container" method="post">
+    <div class="form-header">HÌNH ẢNH</div>
+    <div class="form-container">
+        <div id="list-product" style="float:left; width: 25%; background-color: #808080;">
+            <ul>
+                {% for prd in product %}
+                <li value="{{ prd.id }}"><a href="/admin/images/{{ prd.id }}">{{ prd.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {{ images|length }}
+        <div id="list-product-image" style="float:left; width: 75%">
+            <ul>
+                {% for img in images %}
+                <li value="{{ img.refproduct }}">
+                    <input type="checkbox" name="isdefault">
+                    <img src="{{ img.imageurl }}">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+</form>
+<div id="image-upload">
+    <form action="/admin/upload" method="post" enctype="multipart/form-data">
+        <input type="file" multiple="" name="file"><br/>
+        <input type="text" id="refproduct" name="refproduct"><br/>
+        <input type="submit" value="Upload">
+    </form>
+</div>
+{% endblock %}

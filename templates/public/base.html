@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmashSport Shop</title>
+</head>
+<script src="{{ url_for('static', filename='public/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jquery.marquee.min.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jqFancyTransitions.1.8.min.js') }}"></script>
+<!--<script src="{{ url_for('static', filename='public/js/jquery.slides.min.js') }}"></script>-->
+<script src="{{ url_for('static', filename='public/js/huyqta.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jquery.paging.js') }}"></script>
+<script src="{{ url_for('static', filename='public/js/jquery.easing.1.3.js') }}"></script>
+<!--<script src="{{ url_for('static', filename='public/js/jquery.jBreadCrumb.1.1.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='public/js/jquery.easy-paging.js') }}"></script>-->
+
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="js/jquery.slides.min.js"></script>-->
+<!--<script src="js/jquery.marquee.min.js"></script>-->
+<!--<script src="js/huyqta.js"></script>-->
+<!--<script src="js/jqFancyTransitions.1.8.min.js"></script>-->
+<!--<script src="js/owl.carousel.min.js"></script>-->
+
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,vietnamese' rel='stylesheet'
+      type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='public/css/style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='public/css/font-awesome/css/font-awesome.min.css') }}"/>
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='public/css/BreadCrumb.css') }}"/>-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='public/css/style.admin.css') }}"/>-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='public/css/style.admin.css') }}"/>-->
+<!--<link href="css/style.css" rel="stylesheet"/>-->
+<!--<link href="css/owl.carousel.css" rel="stylesheet"/>-->
+<!--<link href="css/owl.theme.css" rel="stylesheet"/>-->
+<!--<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+
+<script>
+    $(function () {
+        $("#slides").slidesjs({
+            width: 940,
+            height: 528,
+            start: 1,
+            navigation: {
+                active: false
+            },
+            play: {
+                auto: true
+            },
+            pagination: {
+                active: false
+            }
+        });
+    });
+</script>
+
+<body>
+<!--<div id="fb-root"></div>-->
+<!--<div id="fb-root"></div>-->
+<!--<div id="fb-root"></div>-->
+<!--<div id="fb-root"></div>-->
+<!--<script>(function(d, s, id) {-->
+  <!--var js, fjs = d.getElementsByTagName(s)[0];-->
+  <!--if (d.getElementById(id)) return;-->
+  <!--js = d.createElement(s); js.id = id;-->
+  <!--js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&appId=541619559294528&version=v2.0";-->
+  <!--fjs.parentNode.insertBefore(js, fjs);-->
+<!--}(document, 'script', 'facebook-jssdk'));</script>-->
+<div class="navigation-right">
+    <div class="nav-item-icon"><a href="{{ url_for('gmap') }}"><i class="fa fa-map-marker fa-lg"></i> BẢN ĐỒ</a></div>
+    <div class="nav-item-icon"><i class="fa fa-facebook fa-lg"></i> FACEBOOK</div>
+    <div class="nav-item-icon"><i class="fa fa-at fa-lg"></i> LIÊN HỆ</div>
+    <div class="nav-item-icon"><i class="fa fa-info fa-lg"></i> GIỚI THIỆU</div>
+    <div class="nav-item-icon-home"><a href="{{ url_for('index') }}"><i class="fa fa-home fa-lg"></i> TRANG CHỦ</a>
+    </div>
+</div>
+<header>
+    <div class="logo">
+        <img id="logo-img" src="{{ url_for('static', filename='public/img/smashlogo.jpg') }}"/>
+
+        <div id="searchbox">
+            <form id="formsearch" method="post" action="/public/search">
+                <input type="text" id="tfq" class="searchinput" name="input" size="21" maxlength="120"
+                       placeholder="Tên sản phẩm">
+                <button type="submit" class="searchbutton"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</header>
+<nav>
+    <div class="navigation">
+        <div class="menu-wrap">
+            <nav class="menu">
+                <ul class="clearfix">
+                    {% for cat in category if cat.active == 1 and cat.refparent == 0 %}
+                    <li>
+                        <form action="{{ url_for('public_category', category=cat.id) }}" method="POST">
+                            <input type="submit" value="{{ cat.category }}"
+                                   title="{{ url_for('public_category', category=cat.id) }}">
+                        </form>
+                        <ul class="sub-menu">
+                            {% for trm in trademark if trm.active == 1 and trm.refcategory == cat.id %}
+                            <li>
+                                <form action="{{ url_for('public_trademark', trademark=trm.id) }}" method="POST">
+                                    <input type="submit" value="{{ trm.name }}">
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</nav>
+<!--<div class="product-container"></div>-->
+{% block content %}{% endblock %}
+<footer>
+    <div id="site-information">
+        <div id="support-link">
+            <span id="support-link-head">HỖ TRỢ KHÁCH HÀNG</span>
+            <ul>
+                <li>
+                    <a href="{{ url_for('delivery_policy') }}">Chính sách giao hàng</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('change_policy') }}">Chính sách đổi hàng</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('maintain_policy') }}">Chính sách bảo hành</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('target_policy') }}">Mục tiêu kinh doanh</a>
+                </li>
+            </ul>
+        </div>
+        <div id="why-choose">
+            <span id="why-choose-head">TẠI SAO CHỌN CHÚNG TÔI</span>
+            <ul>
+                <li>
+                    <img alt="Đại lý chính hãng của các hãng"
+                         src="http://balohanghieu.com/images/icon/dai-ly-chinh-hang.png"/>
+
+                    <div>
+                        <span>WEBSITE CẦU LÔNG UY TÍN HÀNG ĐẦU</span>
+                        <span>NÊN GIÁ RẺ BẤT NGỜ</span>
+                    </div>
+                </li>
+                <li>
+                    <img alt="Đại lý chính hãng của các hãng"
+                         src="http://balohanghieu.com/images/icon/nhan-vien-cham-soc-khach-hang.png"/>
+
+                    <div>
+                        <span>NHÂN VIÊN CHĂM SÓC KHÁCH HÀNG</span>
+                        <span>NHIỆT TÌNH VÀ CHU ĐÁO</span>
+                    </div>
+                </li>
+                <li>
+                    <img alt="Đại lý chính hãng của các hãng"
+                         src="http://balohanghieu.com/images/icon/tham-gia-cac-chuong-trinh.png"/>
+
+                    <div>
+                        <span>THAM GIA CÁC CHƯƠNG TRÌNH</span>
+                        <span>KHUYẾN MÃI GIẢM GIÁ QUANH NĂM</span>
+                    </div>
+                </li>
+                <li>
+                    <img alt="Đại lý chính hãng của các hãng"
+                         src="http://balohanghieu.com/images/icon/de-dang-tim-kiem-san-pham.png"/>
+
+                    <div>
+                        <span>DỄ DÀNG TÌM KIẾM SẢN PHẨM</span>
+                        <span>5000++ SẢN PHẨM BALO TÚI VALI</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="fb-friends">
+            <span id="fb-friends-head">CỘNG ĐỒNG KHÁCH HÀNG</span>
+            <!--<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fsmashsportshopping&amp;width=292&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=541619559294528" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%; height:100%;" allowTransparency="true"></iframe>-->
+        </div>
+    </div>
+    <br>
+
+    <div class='marquee'>
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_yonex.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_asics.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_kswiss.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_adidas.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_head.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_ua.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_nb.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_kookaburra.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_puma.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_saucony.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_odlo.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_prince.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mazon.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_hitec.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_nike.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_gryphon.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_lining.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_tk.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_hilly.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_yehlex.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_vibram.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mercian.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_merrell.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_thorlo.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_craft.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_mizuno.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_wilson.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_grays.jpg') }}">
+        <img alt="Scroll image" style="border:0px"
+             src="{{ url_for('static', filename='public/img/scrolls/brand_scroll_babolat.jpg') }}">
+    </div>
+    <div class="footer-info">
+        <div class="footer-content">
+            <div class="footer-content-item">
+                <span> ĐIỆN THOẠI </span>
+
+                <p>1231231232131</p>
+            </div>
+            <div class="footer-content-item">
+                <span> EMAIL </span>
+
+                <p>anhhuydng@gmail.com</p>
+            </div>
+            <div class="footer-content-item">
+                <span> THEO DÕI </span>
+
+                <p>FACEBOOK</p>
+            </div>
+            <div class="footer-content-item">
+                <span> ĐỊA CHỈ </span>
+
+                <p>107 Thanh Long - TP Đà Nẵng</p>
+            </div>
+
+        </div>
+        <div class="footer-copyright">Copyright © 2014, SmashSport Shop</div>
+    </div>
+</footer>
+</body>
+</html>

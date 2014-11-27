@@ -1,0 +1,124 @@
+@media screen and (max-width: 1900px) {
+    html, body {
+        background: url("../img/background.jpg") repeat;
+        width: 100%;
+        align-content: center;
+    }
+
+    span {
+        display: inline-block;
+        vertical-align: middle;
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    #login-form {
+        width: 400px;
+        height: 100%;
+        margin: 10px auto;
+    }
+
+    #submit {
+        width: 80px;
+    }
+
+    .container {
+        height: 100%;
+        width: 90%;
+        margin: 0 auto;
+        border: 1px grey solid;
+    }
+
+    .form-manager,
+    .form-selector {
+        float: left;
+        background-color: #CCCCCC;
+        border-bottom: 1px solid #c09853;
+        border: 5px;
+        margin: 5px 10px;
+    }
+
+    .form-selector ul {
+        list-style-type: none;
+        margin: 5px 0;
+    }
+
+    .form-selector ul li {
+        cursor: default;
+        margin: 5px;
+    }
+
+    .form-selector ul li:hover {
+        cursor: default;
+        background-color: #b3b3b3;
+    }
+
+    .form-container {
+        width: 100%;
+        margin: 0 auto;
+        overflow-y: auto;
+        max-height: 500px;
+    }
+
+    .form-container table tr td textarea {
+        width: 90%;
+        height: 40px;
+    }
+
+    /*.table-grid tr td {*/
+    /*border: 1px solid #c43c35;*/
+    /*width: auto;*/
+    /*}*/
+    .table-grid {
+        width: 100%;
+        height: 500px;
+    }
+
+    .table-grid thead tr th {
+        border-right: 1px dotted #005580;
+        margin: 0;
+        padding: 0;
+    }
+
+    .table-grid tbody tr td {
+        /*border-right: 1px dotted #005580;*/
+        border: 1px dotted #005580;
+        margin: 0;
+        padding: 0;
+    }
+
+    .table-grid tbody tr:hover {
+        background-color: lightcoral;
+    }
+
+    .table-input {
+        display: none;
+    }
+
+    .table-header {
+        background-color: #0088cc;
+        width: auto;
+        text-align: center;
+    }
+
+    .form-header {
+        width: 100%;
+        text-align: center;
+        background-color: #CCCCCC;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    thead, tbody {
+        /*display: block;*/
+    }
+
+    tbody {
+        height: 400px; /* Just for the demo          */
+        overflow-y: auto; /* Trigger vertical scroll    */
+        overflow-x: hidden; /* Hide the horizontal scroll */
+    }
+
+    .input-form{
+        border: 1px solid #b3b3b3;
+    }
+}

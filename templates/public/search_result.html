@@ -1,0 +1,100 @@
+{% extends "public/base.html" %}
+{% block content %}
+<script>
+    var counts = '{{ products }}';
+</script>
+<section>
+    <div class="product-container">
+        <div class="filter">
+            <div id="filter-header">FILTER</div>
+            <div id="filter-price">
+                <form id="filter-form" method="post">
+                    <ul>
+                        <li>
+                            <button name="filter_price" value="0" type="submit">ALL</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="1" type="submit">5m above</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="2" type="submit">3m -> 5m</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="3" type="submit">1m -> 3m</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="4" type="submit">Under 1m</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="products">
+            <div>
+                <p>Breadcrumbs:
+                    {% for crumb in g.breadcrumbs %}
+                    <a href="{{ crumb.path }}">{{ crumb.title }}</a>
+                    {% if not loop.last %}&raquo;{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="product-bar">
+                Sort by
+                <select class="sort-select">
+                    <option value="#">Price</option>
+                    <option value="#">Newest</option>
+                </select>
+                Item per page
+                <select class="item-per-page">
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="24">24</option>
+                    <option value="999">All</option>
+                </select>
+                <span id="product_count" style="margin:0; padding: 0; vertical-align: middle">{{ products|length }}</span>
+                <span id="category_count" style="margin:0; padding: 0; vertical-align: middle">{{ category|length }}</span>
+            </div>
+            <div class="product-items">
+                <ul>
+                    {% for prd in products if prd.active == 1 %}
+                    <li class="item-box">
+                        <a href="{{ url_for('public_product', product=prd.id) }}">
+                            <article>
+                                <figure>
+                                    <img src="{{ prd.imageurl }}">
+                                    {% if prd.refdiscount == 1 %}
+                                    <span class="product-sale">Sale</span><br><br>
+                                    {% else %}
+                                    <span class="product-sale not-sale"></span><br><br>
+                                    {% endif %}
+                                </figure>
+                            </article>
+                            <span class="product-name">{{ prd.name }}</span><br>
+                            {% if not prd.disprice %}
+                            <span class="product-price">{{ prd.price }} VND</span><br>
+                            {% else %}
+                            <span class="product-price-old">{{ prd.price }} VND</span>
+                            <span class="product-price-discount">{{ prd.disprice }} VND</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+        <div id="pagination">
+            <ol id="paging">
+                <li>Prev</li>
+                <li>#n</li>
+                <li>#n</li>
+                <li>#c</li>
+                <li>#n</li>
+                <li>#n</li>
+                <li>Next</li>
+            </ol>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

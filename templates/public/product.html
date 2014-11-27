@@ -1,0 +1,123 @@
+{% extends "public/base.html" %}
+{% block content %}
+<section>
+    <div style="width: 900px; height: auto;">
+        <p>ABC</p>
+    </div>
+    <div style="width: 900px; height: auto; margin-left: auto; margin-right: auto; ">
+        <div style="width: 450px; height: auto; float: left; position: relative;">
+            <div class="product-container">
+                <div id="product-details">
+                    <table>
+                        <tr>
+                            <td>
+                                <div id="product-image-list" style="float: left">
+                                    <ul>
+                                        {% for img in images %}
+                                        <li><img src="{{ img.imageurl }}"></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>
+                                <div id="product-image" style="float: left; margin-left: 10px; margin-top: 20px;">
+                                    <img src="">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div style="width: 450px; height: auto; float: left; position: relative;">
+            <div id="product-information">
+                <span id="product-name">{{ product.name }}</span><br>
+                {% if not product.disprice %}
+                <span id="product-price">{{ product.price }} VND</span><br>
+                {% else %}
+                <span id="product-price-old">{{ product.price }} VND</span><br>
+                <span id="product-price-discount">{{ product.disprice }} VND</span>
+                {% endif %}
+                <hr>
+            </div>
+            <!--<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fsmashsportshopping&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=541619559294528" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe><br>-->
+            <!--<div class="fb-send" data-href="https://www.facebook.com/smashsportshopping" data-colorscheme="light"></div>-->
+        </div>
+    </div>
+    <div id="description">
+        <div class="product-infor-head">THÔNG TIN SẢN PHẨM</div>
+        <!-- description -->
+        {% if not product.description %}
+        <div class="product-description">
+            Đang cập nhật
+        </div>
+        {% else %}
+        <div id="product-description-temp" style="display: none">
+            {{ product.description }}
+        </div>
+        <div class="product-description"></div>
+        <script>
+            var myElement = $("#product-description-temp").text();
+            $(".product-description").html(myElement);
+        </script>
+        {% endif %}
+    </div>
+
+    <div id="technical">
+        <div class="product-infor-head">THÔNG SỐ KỸ THUẬT</div>
+        <!-- technical -->
+        {% if product.technical %}
+        <div id="product-technical-temp" style="display: none">
+            {{ product.technical }}
+        </div>
+        <div class="product-technical"></div>
+        <script>
+            var myElement = $("#product-technical-temp").text();
+            $(".product-technical").html(myElement);
+        </script>
+        {% else %}
+        <div class="product-technical">
+            Đang cập nhật
+        </div>
+        {% endif %}
+    </div>
+
+    <div id="commentfb">
+        <div class="product-infor-head">Ý KIẾN NHẬN XÉT</div>
+        <div class="fb-comments" data-href="http://127.0.0.1:5000/public/product" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+    </div>
+    <br>
+
+    <div id="suggestion">
+        <div class="product-infor-head">CÓ THỂ BẠN SẼ THÍCH</div>
+        <div class="product-items">
+            <ul>
+                {% for rndprd in randomprd %}
+                <li class="item-box">
+                    <a href="{{ url_for('public_product', product=rndprd.id) }}">
+                        <article>
+                            <figure>
+                                <img src="{{ rndprd.imageurl }}">
+                                {% if rndprd.refdiscount == 1 %}
+                                <span class="product-sale">Sale</span><br><br>
+                                {% else %}
+                                <span class="product-sale not-sale"></span><br><br>
+                                {% endif %}
+                            </figure>
+                        </article>
+                        <span class="product-name">{{ rndprd.name }}</span><br>
+                        {% if not rndprd.disprice %}
+                        <span class="product-price">{{ rndprd.price }} VND</span><br>
+                        {% else %}
+                        <span class="product-price-old">{{ rndprd.price }} VND</span>
+                        <span class="product-price-discount">{{ rndprd.disprice }} VND</span>
+                        {% endif %}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

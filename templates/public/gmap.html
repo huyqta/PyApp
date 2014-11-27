@@ -1,0 +1,38 @@
+{% extends "public/base.html" %}
+{% block content %}
+<section>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript">
+        google.maps.visualRefresh = true;
+
+        function initialize() {
+            var mapOptions = {
+                zoom: 16,
+                center: new google.maps.LatLng(16.084846, 108.215121),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false
+            }
+            var map = new google.maps.Map(document.getElementById('map'),
+                    mapOptions);
+
+            var myLatLng = new google.maps.LatLng(16.084846, 108.215121);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: "SwissTV SA"
+            });
+            var myInfoWindow = new google.maps.InfoWindow({
+                content: "<div id='adress_text_one'>SwissTV SA</div><div id='adress_text_two'>20 rue Philippe Plantamour, 1201 Geneva, Switzerland</div>"
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                myInfoWindow.open(map, marker);
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <div id="map" style="height: 400px;">
+    </div>
+</section>
+{% endblock %}

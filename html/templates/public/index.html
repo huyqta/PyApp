@@ -1,0 +1,135 @@
+{% extends "public/base.html" %}
+{% block content %}
+<section>
+
+    <div id="right-side">
+        <div id="slideshowHolder-box">
+            <div id="slideshowHolder">
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-dinosaurs.jpg') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/carousel-tattlyweenies.jpg') }}"/>
+            </div>
+        </div>
+        <div class="text-head"> VỢT</div>
+        <div class="item-row">
+            <div class="item-group">
+                {% for prd in product if prd.refcategory == 1 and prd.active == 1 and prd.option[0:1] == '1' %}
+                <article class="item">
+                    <figure>
+                        <img src="{{ prd.imageurl }}">
+                        <span>{{ prd.name }}</span>
+
+                        <p>{{ prd.price }} VND</p>
+                        <!--{% if prd.refdiscount == 1 %}-->
+                        <!--<div class="discount-info"><span>{{ prd.refdiscount }}</span></div>-->
+                        <!--{% endif %}-->
+                    </figure>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="text-head"> GIÀY</div>
+        <div class="item-row">
+            <div class="item-group">
+                {% for prd in product if prd.refcategory == 8 and prd.active == 1 and prd.option[0:1] == '1' %}
+                <article class="item">
+                    <figure>
+                        <img src="{{ prd.imageurl }}">
+                        <span>{{ prd.name }}</span>
+
+                        <p>{{ prd.price }} VND</p>
+                        <!--{% if prd.refdiscount == 1 %}-->
+                        <!--<div class="discount-info"><span>GIẢM GIÁ 50%</span></div>-->
+                        <!--{% endif %}-->
+                    </figure>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="text-head"> ÁO NAM</div>
+        <div class="item-row">
+            <div class="item-group">
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+
+
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/shirts/1281.png">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+            </div>
+        </div>
+        <div class="text-head"> ÁO NỮ</div>
+        <div class="item-row">
+            <div class="item-group">
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+                    </figure>
+                </article>
+                <article class="item">
+                    <figure>
+                        <img src="img/products/bags/1556_G_1412849970704.jpg">
+                        <span>YONEX RUNNING LINES T-SHIRT</span>
+
+                        <p>USD 200.00</p>
+
+
+                    </figure>
+                </article>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+{% endblock %}

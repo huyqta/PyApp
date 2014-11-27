@@ -1,0 +1,142 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<div class="form-header">MAT HANG</div>
+<div class="form-container">
+    <table class="table-grid">
+        <thead style="background-color: coral">
+        <!--<tr class="table-header">-->
+        <tr>
+            <th width="50px" height="auto">ID</th>
+            <th width="250px" height="auto">PRODUCT</th>
+            <th width="250px" height="auto">DES</th>
+            <th width="250px" height="auto">TECH</th>
+            <th width="250px" height="auto">IMG</th>
+            <th width="150px" height="auto">PRICE</th>
+            <th width="150px" height="auto">CATE</th>
+            <th width="150px" height="auto">DISCOUNT</th>
+            <th width="150px" height="auto">ACT</th>
+            <th width="150px" height="auto">DISCOUNT PRICE</th>
+            <th width="150px" height="auto">OPTION</th>
+            <th width="150px" height="auto">TRADEMARK</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pro in product %}
+        <tr class="prd-data-row">
+            <td width="50px" height="auto">{{ pro.id }}</td>
+            <td width="250px" height="auto">{{ pro.name }}</td>
+            <td width="250px" height="auto">{{ pro.description }}</td>
+            <td width="250px" height="auto">{{ pro.technical }}</td>
+            <td width="50px" height="auto"><img style="width: 50px; height: 50px;" src="{{ pro.imageurl }}"></td>
+            <td width="150px" height="auto">{{ pro.price }}</td>
+            {% for cat in category if cat.id == pro.refcategory %}
+            <td width="150px" height="auto" title="{{ pro.refcategory }}">{{ cat.category }}</td>
+            {% endfor %}
+            <td width="150px" height="auto">{{ pro.refdiscount }}</td>
+            <td width="50px" height="auto">{{ pro.active }}</td>
+            <td width="150px" height="auto">{{ pro.disprice }}</td>
+            <td width="150px" height="auto">{{ pro.option }}</td>
+            {% for trm in trademark if trm.id == pro.reftrademark %}
+            <td width="150px" height="auto" title="{{ pro.reftrademark }}">{{ trm.name }}</td>
+            {% endfor %}
+            <!--<td width="150px" height="auto">{{ pro.reftrademark }}</td>-->
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<form id="form-item" class="input-form" method="post" action="{{ url_for('product_crud') }}">
+    <table>
+        <tr>
+            <td>ID</td>
+            <td><input type="text" id="new-prd-id" name="new_prd_id" readonly></td>
+            <td>Tên hàng</td>
+            <td><input type="text" id="new-prd-name" name="new_prd_name"></td>
+            <td>Giá</td>
+            <td><input type="text" id="new-prd-price" name="new_prd_price"></td>
+            <td>Giá khuyến mãi</td>
+            <td><input type="text" id="new-prd-disprice" name="new_prd_disprice"></td>
+        </tr>
+        <tr>
+            <td>Loại hàng</td>
+            <td width="250px">
+                <select width="250px" id="new-prd-cat" name="new_prd_cat">
+                    {% for cat in category if cat.active == 1 and cat.refparent == 0 %}
+                    <option value="{{ cat.id }}"> {{ cat.category }}</option>
+                    <!--{% for subcat in category if subcat.active == 1 and subcat.refparent == cat.id %}-->
+                    <!--<option value="{{ subcat.id }}"> ╚> {{ subcat.category }}</option>-->
+                    <!--{% endfor %}-->
+                    {% endfor %}
+                </select>
+            </td>
+            <td>Thuong hieu</td>
+            <td width="250px">
+                <select width="250px" id="new-prd-trm" name="new_prd_trm">
+                    {% for trm in trademark if trm.active == 1 %}
+                    <option value="{{ trm.id }}"> {{ trm.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>Đợt khuyến mãi</td>
+            <td width="150px">
+                <select width="150px" id="new-prd-dis" name="new_prd_dis">
+                    <option>123</option>
+                    <option>123</option>
+                    <option>123</option>
+                    <option>123</option>
+                    <option>123</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Mô tả</td>
+            <td colspan="7"><textarea id="new-prd-des" name="new_prd_des"
+                                      style="height: 100px; width: 400px"></textarea></td>
+        </tr>
+        <tr>
+            <td>Thông số kỹ thuật</td>
+            <td colspan="7"><textarea id="new-prd-tech" name="new_prd_des"
+                                      style="height: 100px; width: 400px"></textarea></td>
+        </tr>
+        <tr>
+            <td>Sử dụng</td>
+            <td><input type="checkbox" id="new-prd-act" name="new_prd_act" checked></td>
+        </tr>
+        <tr>
+            <td>Hiển thị trang chủ</td>
+            <td><input type="checkbox" id="new-prd-option-1" name="new_prd_option_1" checked></td>
+        </tr>
+        <tr>
+            <td>Sản phẩm mới</td>
+            <td><input type="checkbox" id="new-prd-option-2" name="new_prd_option_2" checked></td>
+        </tr>
+        <tr>
+            <td>Sản phẩm yêu thích</td>
+            <td><input type="checkbox" id="new-prd-option-3" name="new_prd_option_3" checked></td>
+        </tr>
+        <tr>
+            <td>Hinh anh</td>
+            <td><img id="new-prd-img" name="new_prd_img" src="" height="100px" width="100px"></td>
+            <td colspan="5">
+                <div id="product-image-select">
+                    {% for img in images %}
+                    <img src="{{ img.imageurl }}" title="{{ img.refproduct }}" style="display: none;">
+                    {% endfor %}
+                </div>
+            </td>
+        </tr>
+        <td>
+            <input type="button" class="buttonC" id="create-prd" name="new_prd_type" value="C">
+            <input type="button" class="buttonU" id="update-prd" name="new_prd_type" value="U">
+            <input type="button" class="buttonD" id="delete-prd" name="new_prd_type" value="D">
+        </td>
+        <td>
+            <script type="text/javascript">
+                CKEDITOR.replace('new-prd-des');
+                CKEDITOR.replace('new-prd-tech');
+            </script>
+        </td>
+    </table>
+</form>
+{% endblock %}

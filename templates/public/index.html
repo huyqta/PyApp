@@ -1,0 +1,57 @@
+{% extends "public/base.html" %}
+{% block content %}
+<section>
+
+    <div id="right-side">
+        <div id="slideshowHolder-box">
+            <div id="slideshowHolder">
+                <img src="{{ url_for('static', filename='public/img/slides/1.gif') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/2.gif') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/3.gif') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/4.gif') }}"/>
+                <img src="{{ url_for('static', filename='public/img/slides/5.gif') }}"/>
+            </div>
+        </div>
+        <div>
+            <p>ABC
+            </p>
+        </div>
+        <div class="text-head">SẢN PHẨM MỚI</div>
+        <div class="item-row">
+            <div class="item-group">
+                {% for prd in product if prd.active == 1 and prd.option[1:2] == '1' %}
+                <article class="item">
+                    <figure>
+                        <img src="{{ prd.imageurl }}">
+
+                        <div><span>{{ prd.name }}</span></div>
+                        <p>{{ prd.price }} VND</p>
+                        {% if prd.refdiscount == 1 %}
+                        <div class="discount-info"><span>{{ prd.refdiscount }}</span></div>
+                        {% endif %}
+                    </figure>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="text-head">SẢN PHẨM YÊU THÍCH</div>
+        <div class="item-row">
+            <div class="item-group">
+                {% for prd in product if prd.active == 1 and prd.option[2:3] == '1' %}
+                <article class="item">
+                    <figure>
+                        <img src="{{ prd.imageurl }}">
+
+                        <div><span>{{ prd.name }}</span></div>
+                        <p>{{ prd.price }} VND</p>
+                        {% if prd.refdiscount == 1 %}
+                        <div class="discount-info"><span>GIẢM GIÁ 50%</span></div>
+                        {% endif %}
+                    </figure>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

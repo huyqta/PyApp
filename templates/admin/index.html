@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SmashSport Shop Administrator</title>
+
+    <meta charset="UTF-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<script src="{{ url_for('static', filename='admin/js/lib/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/js/admin.js') }}"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin/css/style.admin.css') }}"/>
+<body>
+<!--
+<img src="img/smashlogo.jpg" style="width: 200px; height: 100px; margin: 50px auto;"/>
+-->
+<div style="background-color: #808080; margin: 100px auto; border-bottom: double 4px #000000; border-top: double 4px #000000">
+    <form method="post" action="{{ url_for('admin_login') }}">
+        <div id="login-form">
+            <table>
+                <tr>
+                    <td>Account:</td>
+                    <td><input type="text" value="admin" name="username" id="username"></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" value="1" name="password" id="password"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="center">
+                        <input type="submit" value="Login" id="submit">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <span style="color: red">{{ loginfail }}</span>
+    </form>
+</div>
+</body>
+</html>

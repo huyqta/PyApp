@@ -1,0 +1,114 @@
+{% extends "public/base.html" %}
+{% block content %}
+<script>
+    var counts = '{{ products }}';
+</script>
+<section>
+
+    <div class="product-container">
+        <div id="breadcrumb">{{breadcrumb}}</div>
+        <script>
+            $('#breadcrumb').html($('#breadcrumb').text().replace('category/', ''));
+        </script>
+        <div class="filter">
+            <div class="filter-header">GIÁ</div>
+            <div id="filter-price">
+                <form class="filter-form" method="post">
+                    <ul>
+                        <li>
+                            <button name="filter_price" value="0" type="submit">Tất cả</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="1" type="submit">Từ 5.000.000 trở lên</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="2" type="submit">Từ 3.000.000 - 5.000.000</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="3" type="submit">Từ 1.000.000 - 3.000.000</button>
+                        </li>
+                        <li>
+                            <button name="filter_price" value="4" type="submit">Dưới 1.000.000</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+            <div class="filter-header">THƯƠNG HIỆU</div>
+            <div id="filter-trademark">
+                <form class="filter-form" method="post">
+                    <ul>
+                        {% for trm in trademark if trm.active == 1 %}
+                        <li>
+                            <button name="filter_trademark" value="{{trm.id}}" type="submit">{{trm.name}}</button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="products">
+
+
+            <div class="product-bar">
+                Sắp xếp theo
+                <select class="sort-select">
+                    <option value="ASC">Giá tăng dần</option>
+                    <option value="DESC">Giá giảm dần</option>
+                </select>
+                Số hàng mỗi trang
+                <select class="item-per-page">
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="24">24</option>
+                    <option value="999">All</option>
+                </select>
+                <span id="product_count"
+                      style="margin:0; padding: 0; vertical-align: middle; display: none;">{{ products|length }}</span>
+                <span id="category_count"
+                      style="margin:0; padding: 0; vertical-align: middle; display: none;">{{ category|length }}</span>
+            </div>
+            <div class="product-items">
+                <ul>
+                    {% for prd in products if prd.active == 1 %}
+                    <li class="item-box" value="{{prd.price}}">
+                        <a href="{{ url_for('public_product', product=prd.id) }}">
+                            <article>
+                                <figure>
+                                    <img src="{{ prd.imageurl }}">
+                                    {% if prd.refdiscount == 1 %}
+                                    <span class="product-sale">Sale</span><br><br>
+                                    {% else %}
+                                    <span class="product-sale not-sale"></span><br><br>
+                                    {% endif %}
+                                </figure>
+                            </article>
+                            <span class="product-name">{{ prd.name }}</span><br>
+                            {% if not prd.disprice %}
+                            <span class="product-price">{{ prd.price }} VND</span><br>
+                            {% else %}
+                            <span class="product-price-old">{{ prd.price }} VND</span>
+                            <span class="product-price-discount">{{ prd.disprice }} VND</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+        <div id="pagination">
+            <ol id="paging">
+                <li>Prev</li>
+                <li>#n</li>
+                <li>#n</li>
+                <li>#c</li>
+                <li>#n</li>
+                <li>#n</li>
+                <li>Next</li>
+            </ol>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
