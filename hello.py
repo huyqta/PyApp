@@ -2,6 +2,8 @@ import os
 import urllib
 import urllib2
 import re
+import time
+
 from flask import Flask, render_template, url_for, request, redirect, session, jsonify, send_from_directory, make_response
 from werkzeug import secure_filename
 # from flask.ext import breadcrumbs
@@ -16,6 +18,7 @@ from JSONEncoder import *
 from breadcrumb import breadcrumb
 from myutils import *
 from myapis import *
+from background_process import *
 
 app = Flask(__name__)
 
@@ -504,56 +507,10 @@ def target_policy():
 @app.route('/apis/getstreamfromhttp', methods=['POST'])
 def get_stream_from_url():
     url = request.form['url']
-    try:
-        resp = urllib2.urlopen(url)
-        contents = resp.read()
-        if url.find("xemphimso.com") > -1:
-            matchObj = re.search("(file: ').*(',)", contents)
-            if matchObj:
-                last_url = matchObj.group().replace("file: '", "").replace("',", "")
-                return last_url
-
-        elif url.find("www.tivi24h.com") > -1:
-            matchObj = re.search("(var responseText = ).*(;)", contents)
-            if matchObj:
-                last_url = matchObj.group().replace('var responseText = "', '').replace('";', '')
-                return last_url
-
-        elif url.find("tv.tivi24h.com") > -1:
-            matchObj = re.search("(var responseText = ).*(;)", contents)
-            if matchObj:
-                last_url = matchObj.group().replace('file: "', '').replace('",image:', '').replace('";', '')
-                return last_url
-
-            matchObj = re.search("(var responseText = ).*(;)", contents)
-            if matchObj:
-                last_url = matchObj.group().replace('file: "', '').replace('",image:', '').replace('";', '')
-                return last_url
-
-        elif url.find("tivi360") > -1:
-            matchObj = re.search("(var responseText = ).*(;)", contents)
-            if matchObj:
-                last_url = matchObj.group().replace('var responseText = "', '').replace('";', '')
-                return last_url
-
-        elif url.find("htvonline") > -1:
-            matchObj = re.search('(file: ").*(",)', contents)
-            if matchObj:
-                last_url = matchObj.group().replace('file: "', '').replace('",', '')
-                return last_url
-
-	elif url.find("http://tv24.vn/") > -1:
-            matchObj = re.search("('file': 'http).*(',)", contents)
-            if matchObj:
-                last_url = matchObj.group().replace("'file': '", "").replace("',", "")
-                return last_url
-
-
-        return ""
-    except urllib2.HTTPError, error:
-        contents = error.read()
-        return "ERROR"
+    return api_get_stream_from_url(url)
 
 if __name__ == "__main__":
+    example = ThreadingBackground()
+    example.start()
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, use_reloader=False)

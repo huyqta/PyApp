@@ -58,7 +58,7 @@ def SelectDBWhere(table, condition):
 # ###############################
 def Execute(query):
     try:
-        conn = pymysql.connect(host='localhost', user='root', passwd='123', port=3306, db='dbtracking', charset='utf8')
+        conn = pymysql.connect(host='localhost', user='root', passwd='123', port=3306, db='tvpocket', charset='utf8')
         cur = conn.cursor()
         cur.execute(query)
         conn.commit()
